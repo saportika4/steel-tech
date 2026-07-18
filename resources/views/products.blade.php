@@ -121,6 +121,14 @@
         text-shadow: 0 2px 6px rgba(0,0,0,.8);
     }
 
+    .product-category{
+        margin-top:10px;
+        text-align:center;
+        font-size:14px;
+        font-weight:600;
+        color:#666;
+    }
+
     .product-gallery-caption h3 a {
         color: #ffffff;
     }
@@ -155,6 +163,34 @@
             white-space: nowrap;
             padding: 10px 20px;
             font-size: 13px;
+        }
+
+        .product-grid-item{
+            margin-bottom:20px;
+        }
+
+        .photo-gallery figure img{
+            height:260px;
+        }
+
+        .product-gallery-caption{
+            padding:16px;
+        }
+
+        .product-gallery-caption h3{
+            font-size:18px;
+            line-height:1.35;
+
+            display:-webkit-box;
+            -webkit-line-clamp:3;
+            -webkit-box-orient:vertical;
+            overflow:hidden;
+        }
+
+        .product-gallery-caption p{
+            margin-top:8px;
+            font-size:13px;
+            line-height:1.4;
         }
     }
 </style>
@@ -272,9 +308,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function cardTemplate(product) {
         return `
-        <div class="col-lg-4 col-6 product-grid-item">
+        <div class="col-lg-4 col-md-6 col-12 product-grid-item">
             <div class="photo-gallery wow fadeInUp">
-                <a href="${product.image}" class="image-popup" data-cursor-text="View">
+                <a href="${product.image}" class="image-popup">
                     <figure class="image-anime">
                         <img src="${product.image}" alt="${product.name}">
                     </figure>
@@ -282,8 +318,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 <div class="product-gallery-caption">
                     <h3>${product.name}</h3>
-                    <p>${product.category}</p>
                 </div>
+            </div>
+
+            <div class="product-category">
+                ${product.category}
             </div>
         </div>`;
     }

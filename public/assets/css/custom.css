@@ -4976,6 +4976,12 @@ header.main-header .header-sticky.active{
 	padding: 20px;
 }
 
+@media (max-width: 767px) {
+    .contact-image-form-box{
+        flex-direction: column !important;
+    }
+}
+
 .contact-image-box{
     position: relative;
     width: calc(42% - 10px);
@@ -5039,35 +5045,39 @@ header.main-header .header-sticky.active{
 }
 
 .contact-info-item .icon-box{
-	position: relative;
-	height: 50px;
-	width: 50px;
-	background-color: var(--accent-color);
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	overflow: hidden;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    border-radius: 50%;
+    background: #cf814d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .contact-info-item .icon-box::before{
-	content: '';
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background-color: var(--white-color);
-	border-radius: 50%;
-	width: 100%;
-	height: 100%;
-	transform: scale(0);
-	transition: all 0.4s ease-in-out;
-	z-index: 0;
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--theme-color);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform .35s ease;
+    z-index: 0;
 }
 
 .contact-info-item:hover .icon-box::before{
-	transform: scale(1);
+    transform: scale(1);
+}
+
+.contact-info-item .icon-box i{
+    position: relative;
+    z-index: 2;
+    font-size: 22px;
+    color: #fff;
+    transition: color .35s ease;
 }
 
 .contact-info-item .icon-box img{

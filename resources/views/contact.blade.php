@@ -92,6 +92,130 @@
         color:rgba(255,255,255,.8);
         line-height:1.7;
     }
+
+    /* ==========================
+    Contact Page Mobile UX
+    ========================== */
+    @media (max-width: 767px) {
+
+        /* Reduce overall spacing */
+        .page-contact-us{
+            padding:60px 0;
+        }
+
+        /* Contact info card */
+        .contact-info-box{
+            padding:28px 22px;
+            border-radius:16px;
+            margin-bottom:30px;
+        }
+
+        /* Contact rows */
+        .contact-info-list{
+            gap:22px;
+        }
+
+        .contact-info-item{
+            gap:14px;
+            align-items:flex-start;
+        }
+
+        /* Smaller icons */
+        .contact-info-item .icon-box{
+            width:48px;
+            height:48px;
+            min-width:48px;
+        }
+
+        .contact-info-item .icon-box i{
+            font-size:18px;
+        }
+
+        /* Text */
+        .contact-info-item-content span{
+            font-size:12px;
+            margin-bottom:4px;
+            letter-spacing:.3px;
+        }
+
+        .contact-info-item-content h4{
+            font-size:16px;
+            line-height:1.5;
+            word-break:break-word;
+        }
+
+        .contact-info-item-content p{
+            font-size:14px;
+            line-height:1.7;
+        }
+
+        /* Form spacing */
+        .contact-us-form{
+            margin-top:10px;
+        }
+
+        .contact-us-form .section-title{
+            margin-bottom:25px;
+        }
+
+        .contact-us-form .section-title h2{
+            font-size:30px;
+            line-height:1.3;
+        }
+
+        .contact-form .form-group{
+            margin-bottom:18px !important;
+        }
+
+        .contact-form .form-control{
+            height:54px;
+            padding:14px 18px;
+            font-size:15px;
+            border-radius:12px;
+        }
+
+        .contact-form textarea.form-control{
+            height:140px;
+            resize:none;
+        }
+
+        /* Full-width button */
+        #submitBtn{
+            width:100%;
+            min-width:100%;
+            justify-content:center;
+        }
+
+        /* Success/error message */
+        #msgSubmit{
+            font-size:14px;
+            margin-top:18px !important;
+        }
+
+        /* Map section */
+        .google-map{
+            padding-top:60px;
+        }
+
+        .google-map .section-title h2{
+            font-size:30px;
+        }
+
+        .google-map .section-title p{
+            font-size:15px;
+            line-height:1.7;
+        }
+
+        .google-map-iframe iframe{
+            height:320px;
+            border-radius:16px;
+        }
+    }
+
+    .contact-info-item-content h4 a{
+        display:inline-block;
+        padding:4px 0;
+    }
 </style>
 
 @endpush
@@ -225,17 +349,17 @@
                                         </div>
 
                                         <div class="form-group col-md-6 mb-4">
-                                            <input type="email" name="email" class="form-control" id="email" placeholder="E-mail Address" required>
+                                            <input type="email" name="email" class="form-control" id="email" placeholder="E-mail Address" inputmode="email" autocomplete="email" required>
                                             <div class="help-block with-errors"></div>
                                         </div>
 
                                         <div class="form-group col-md-6 mb-4">
-                                            <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone Number" required>
+                                            <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone Number" inputmode="tel" autocomplete="tel" required>
                                             <div class="help-block with-errors"></div>
                                         </div>
 
                                         <div class="form-group col-md-12 mb-5">
-                                            <textarea name="message" class="form-control" id="message" rows="5" placeholder="Tell us about your machine requirement..."></textarea>
+                                            <textarea name="message" class="form-control" id="message" rows="5" placeholder="Tell us which machine you're looking for, material, sheet thickness, or any other requirements..."></textarea>
                                             <div class="help-block with-errors"></div>
                                         </div>
 

@@ -650,7 +650,7 @@
                                 <h2 class="text-anime-style-3" data-cursor="-opaque">Get In Touch</h2>
                             </div>
 
-                            <form id="contactForm" action="{{ route('contact.submit') }}" method="POST" data-toggle="validator" class="contact-form wow fadeInUp" data-wow-delay="0.2s">
+                            <form id="homeContactForm" action="{{ route('contact.submit') }}" method="POST" data-toggle="validator" class="contact-form wow fadeInUp" data-wow-delay="0.2s">
                                 @csrf
                                 <div class="row">
                                     <div class="form-group col-md-6 mb-4">
@@ -679,8 +679,15 @@
                                     </div>
 
                                     <div class="col-md-12">
-                                        <button type="submit" class="btn-default">Submit Message</button>
-                                        <div id="msgSubmit" class="h3 hidden"></div>
+                                        <button type="submit" id="homeSubmitBtn" class="btn-default">
+                                            <span class="btn-text">Submit Message</span>
+                                            <span class="btn-loader d-none">
+                                                <i class="fa fa-spinner fa-spin"></i>
+                                                Sending...
+                                            </span>
+                                        </button>
+
+                                        <div id="homeMsgSubmit" class="h5 text-center" style="margin-top:20px;"></div>
                                     </div>
                                 </div>
                             </form>
@@ -710,5 +717,63 @@
         </div>
     </div>
     <!-- Contact CTA Section End -->
+
+    @push('scripts')
+
+    <script>
+        $('#homeContactForm').on('submit', function (e) {
+
+            e.preventDefault();
+
+            let $form = $(this);
+            let $btn = $('#homeSubmitBtn');
+
+            $btn.prop('disabled', true);
+            $btn.find('.btn-text').addClass('d-none');
+            $btn.find('.btn-loader').removeClass('d-none');
+
+            $('#homeMsgSubmit').html('');
+
+            $.ajax({
+                url: $form.attr('action'),
+                type: 'POST',
+                data: $form.serialize(),
+
+                success: function (response) {
+
+                    $form[0].reset();
+
+                    $('#homeMsgSubmit')
+                        .removeClass()
+                        .addClass('text-success')
+                        .html(response.message);
+                },
+
+                error: function (xhr) {
+
+                    let message = 'Something went wrong.';
+
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        message = xhr.responseJSON.message;
+                    }
+
+                    $('#homeMsgSubmit')
+                        .removeClass()
+                        .addClass('text-danger')
+                        .html(message);
+                },
+
+                complete: function () {
+
+                    $btn.prop('disabled', false);
+                    $btn.find('.btn-loader').addClass('d-none');
+                    $btn.find('.btn-text').removeClass('d-none');
+                }
+            });
+
+        });
+    </script>
+
+    @endpush
 
 @endsection
