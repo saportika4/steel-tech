@@ -99,7 +99,7 @@
                     @endif
                 </div>
                 <p class="text-primary font-semibold">Click to upload image</p>
-                <p class="text-xs text-gray-500 mt-1">PNG, JPG, WEBP up to 10MB</p>
+                <p class="text-xs text-gray-500 mt-1">PNG, JPG, WEBP up to 120 Kb</p>
             </label>
         </div>
 

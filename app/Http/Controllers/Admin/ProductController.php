@@ -84,7 +84,7 @@ class ProductController extends Controller
             'category_id' => ['required', 'exists:categories,id'],
             'name'        => ['required', 'string', 'max:255', 'unique:products,name'],
             'description' => ['nullable', 'string'],
-            'image'       => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
+            'image'       => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:120'],
             'is_active'   => ['nullable', 'boolean'],
             'featured'    => ['nullable', 'boolean'],
         ]);
@@ -127,7 +127,7 @@ class ProductController extends Controller
             'category_id' => ['required', 'exists:categories,id'],
             'name'        => ['required', 'string', 'max:255', Rule::unique('products', 'name')->ignore($product->id)],
             'description' => ['nullable', 'string'],
-            'image'       => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
+            'image'       => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:120'],
             'is_active'   => ['nullable', 'boolean'],
             'featured'    => ['nullable', 'boolean'],
         ]);

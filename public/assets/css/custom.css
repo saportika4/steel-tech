@@ -6826,7 +6826,7 @@ header.main-header .header-sticky.active{
 
 .hero-prime{
 	position: relative;
-	background-image: url('../images/about/home1.png');
+	background-image: url('../images/about/home1-2.webp');
 	background-position: center center;
 	background-size: cover;
 	height: 100vh;
@@ -11741,4 +11741,73 @@ header.main-header.header-gold .main-menu ul ul li a:focus{
 
 .contact-us-circle-prime svg text{
     fill: var(--brand-pink);
+}
+
+.icon-box {
+    position: relative;
+}
+
+.icon-box img,
+.icon-box i {
+    position: relative;
+    z-index: 2;
+}
+
+.icon-box::before {
+    z-index: 1;
+}
+
+.impact-item-prime .icon-box{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.impact-item-prime .icon-box i{
+    position: relative;
+    z-index: 2;
+    font-size: 24px;
+    color: #fff;
+    transition: all .3s ease;
+}
+
+.impact-item-prime:hover .icon-box i{
+    color: #fff;
+}
+
+.why-choose-us-item-prime .icon-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.why-choose-us-item-prime .icon-box i{
+    font-size: 24px;
+    color: #fff;
+    position: relative;
+    z-index: 2;
+    transition: all .4s ease;
+}
+
+.why-choose-us-item-prime:hover .icon-box i{
+    color: #fff;
+}
+
+.approach-item .icon-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.approach-item .icon-box i{
+    font-size: 24px;
+    color: #fff;
+    position: relative;
+    z-index: 2;
+    transition: all .3s ease;
+}
+
+.approach-item:hover .icon-box i{
+    color: #fff;
 }

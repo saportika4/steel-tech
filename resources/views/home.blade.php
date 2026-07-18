@@ -200,7 +200,7 @@
                         <div class="about-us-image-box-prime wow fadeInUp">
                             <div class="about-us-image-prime">
                                 <figure>
-                                    <img src="{{ asset('assets/images/about/home4.png') }}" alt="Steel Tech Facility">
+                                    <img src="{{ asset('assets/images/about/home4.webp') }}" alt="Steel Tech Facility">
                                 </figure>
                             </div>
 
@@ -279,7 +279,7 @@
                                     <p>Cities with local installation & service engineers.</p>
                                 </div>
                                 <div class="icon-box">
-                                    <img src="{{ asset('assets/images/icon-why-choose-item-1-prime.svg') }}" alt="">
+                                    <i class="fa-solid fa-map-location-dot"></i>
                                 </div>
                                 <div class="why-choose-item-bg-icon-prime">
                                     <img src="{{ asset('assets/images/icon-why-choose-bg-1-prime.svg') }}" alt="">
@@ -292,7 +292,7 @@
                                     <p>Machine series covering sheet, tube & combination cutting.</p>
                                 </div>
                                 <div class="icon-box">
-                                    <img src="{{ asset('assets/images/icon-why-choose-item-2-prime.svg') }}" alt="">
+                                    <i class="fa-solid fa-gears"></i>
                                 </div>
                                 <div class="why-choose-item-bg-icon-prime">
                                     <img src="{{ asset('assets/images/icon-why-choose-bg-2-prime.svg') }}" alt="">
@@ -312,7 +312,7 @@
                 <div class="col-xl-6">
                     <div class="why-choose-us-image-prime">
                         <figure class="image-anime reveal">
-                            <img src="{{ asset('assets/images/about/home3.png') }}" alt="Laser Cutting Machine">
+                            <img src="{{ asset('assets/images/about/home3.webp') }}" alt="Laser Cutting Machine">
                         </figure>
                     </div>
                 </div>
@@ -432,7 +432,7 @@
                         </div>
                         <div class="impact-item-body-prime">
                             <div class="icon-box">
-                                <img src="{{ asset('assets/images/icon-impact-item-1-prime.svg') }}" alt="">
+                                <i class="fa-solid fa-layer-group"></i>
                             </div>
                             <div class="impact-item-content-prime">
                                 <h2>Sheet Metal</h2>
@@ -451,7 +451,7 @@
                         </div>
                         <div class="impact-item-body-prime">
                             <div class="icon-box">
-                                <img src="{{ asset('assets/images/icon-impact-item-2-prime.svg') }}" alt="">
+                                <i class="fa-solid fa-industry"></i>
                             </div>
                             <div class="impact-item-content-prime">
                                 <h2>Heavy Engineering</h2>
@@ -470,7 +470,7 @@
                         </div>
                         <div class="impact-item-body-prime">
                             <div class="icon-box">
-                                <img src="{{ asset('assets/images/icon-impact-item-3-prime.svg') }}" alt="">
+                                <i class="fa-solid fa-layer-group"></i>
                             </div>
                             <div class="impact-item-content-prime">
                                 <h2>Medical & Decorative</h2>

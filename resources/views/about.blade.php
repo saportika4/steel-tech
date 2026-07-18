@@ -33,7 +33,7 @@
                     <div class="about-us-image-box wow fadeInUp">
                         <div class="about-us-image">
                             <figure class="image-anime">
-                                <img src="{{ asset('assets/images/about/about1.png') }}" alt="Steel Tech Engineering & Equipment Solutions">
+                                <img src="{{ asset('assets/images/about/about1.webp') }}" alt="Steel Tech Engineering & Equipment Solutions">
                             </figure>
                         </div>
 
@@ -158,7 +158,7 @@
                     <div class="approach-item wow fadeInUp">
                         <div class="approach-item-header">
                             <div class="icon-box">
-                                <img src="{{ asset('assets/images/icon-approach-1.svg') }}" alt="">
+                                <i class="fa-solid fa-layer-group"></i>
                             </div>
                             <div class="approach-item-title">
                                 <h2>Sheet Metal Machines</h2>
@@ -184,7 +184,7 @@
                     <div class="approach-item wow fadeInUp" data-wow-delay="0.2s">
                         <div class="approach-item-header">
                             <div class="icon-box">
-                                <img src="{{ asset('assets/images/icon-approach-2.svg') }}" alt="">
+                                <i class="fa-solid fa-circle-nodes"></i>
                             </div>
                             <div class="approach-item-title">
                                 <h2>Tube Cutting Machines</h2>
@@ -210,7 +210,7 @@
                     <div class="approach-item wow fadeInUp" data-wow-delay="0.4s">
                         <div class="approach-item-header">
                             <div class="icon-box">
-                                <img src="{{ asset('assets/images/icon-approach-3.svg') }}" alt="">
+                                <i class="fa-solid fa-gears"></i>
                             </div>
                             <div class="approach-item-title">
                                 <h2>Plate & Tube Combination</h2>
@@ -352,21 +352,21 @@
                         <!-- Certificate 1 -->
                         <div class="global-impact-item wow fadeInUp">
                             <div class="certificate-card">
-                                <img src="{{ asset('assets/images/about/vnj-cert.png') }}" alt="VN-J Authorized Partner">
+                                <img src="{{ asset('assets/images/about/vnj-cert.jpg') }}" alt="VN-J Authorized Partner">
                             </div>
                         </div>
 
                         <!-- Certificate 2 -->
                         <div class="global-impact-item wow fadeInUp" data-wow-delay="0.2s">
                             <div class="certificate-card">
-                                <img src="{{ asset('assets/images/about/accurl-cert.png') }}" alt="Accurl Authorization">
+                                <img src="{{ asset('assets/images/about/accurl-cert.jpg') }}" alt="Accurl Authorization">
                             </div>
                         </div>
 
                         <!-- Certificate 3 -->
                         <div class="global-impact-item wow fadeInUp" data-wow-delay="0.4s">
                             <div class="certificate-card">
-                                <img src="{{ asset('assets/images/about/harsle-cert.png') }}" alt="Harsle Authorization">
+                                <img src="{{ asset('assets/images/about/harsle-cert.jpg') }}" alt="Harsle Authorization">
                             </div>
                         </div>
 
