@@ -46,3 +46,30 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/products/{product}/toggle-status', [ProductController::class, 'toggleStatus'])->name('products.toggle-status');
     });
 });
+
+Route::get('/create-public-storage-link', function () {
+
+    $target = storage_path('app/public');
+    $link = $_SERVER['DOCUMENT_ROOT'] . '/storage';
+
+    if (file_exists($link) || is_link($link)) {
+        return [
+            'success' => false,
+            'message' => 'storage already exists',
+            'link' => $link,
+        ];
+    }
+
+    if (symlink($target, $link)) {
+        return [
+            'success' => true,
+            'target' => $target,
+            'link' => $link,
+        ];
+    }
+
+    return [
+        'success' => false,
+        'message' => 'Failed to create symlink. Symlinks may be disabled by your hosting provider.',
+    ];
+});
