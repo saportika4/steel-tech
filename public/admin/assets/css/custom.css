@@ -1,0 +1,62 @@
+/* Custom Admin Styles */
+:root {
+    --brand-color: #fea935;
+    --brand-dark: #e59420;
+    --brand-light: #ffb951;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--brand-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--brand-dark);
+}
+
+/* DataTables custom styling */
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: linear-gradient(135deg, var(--brand-color), var(--brand-dark)) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: var(--brand-light) !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* SweetAlert custom colors */
+.swal2-confirm {
+    background-color: var(--brand-color) !important;
+}
+
+.swal2-confirm:hover {
+    background-color: var(--brand-dark) !important;
+}
+
+/* Loading animation */
+.loading-spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--brand-color);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
