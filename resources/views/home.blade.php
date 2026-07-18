@@ -215,7 +215,7 @@
                             <div class="about-us-info-item-list-prime">
                                 <div class="about-us-info-item-prime wow fadeInUp">
                                     <div class="icon-box">
-                                        <img src="{{ asset('assets/images/icon-about-us-item-1-prime.svg') }}" alt="">
+                                        <i class="fa-solid fa-industry"></i>
                                     </div>
                                     <div class="about-us-info-item-content-prime">
                                         <h3>VN-J Precision Mechanics Corp</h3>
@@ -225,7 +225,7 @@
 
                                 <div class="about-us-info-item-prime wow fadeInUp" data-wow-delay="0.2s">
                                     <div class="icon-box">
-                                        <img src="{{ asset('assets/images/icon-about-us-item-2-prime.svg') }}" alt="">
+                                        <i class="fa-solid fa-screwdriver-wrench"></i>
                                     </div>
                                     <div class="about-us-info-item-content-prime">
                                         <h3>End-to-End Local Support</h3>

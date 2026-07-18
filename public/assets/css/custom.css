@@ -11811,3 +11811,19 @@ header.main-header.header-gold .main-menu ul ul li a:focus{
 .approach-item:hover .icon-box i{
     color: #fff;
 }
+
+.about-us-info-item-prime .icon-box{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.about-us-info-item-prime .icon-box i{
+    font-size: 30px;
+    color: #fff;
+}

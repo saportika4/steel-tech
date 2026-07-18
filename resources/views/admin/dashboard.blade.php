@@ -86,25 +86,6 @@
                 <div class="mt-5 text-white-light text-sm font-semibold">Pinned on homepage</div>
             </div>
 
-            {{-- In Stock --}}
-            <div class="panel bg-gradient-to-r from-emerald-500 to-emerald-400">
-                <div class="flex justify-between items-start">
-                    <div class="text-md font-semibold text-white-light">In Stock</div>
-                    <svg class="w-8 h-8 opacity-40 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
-                    </svg>
-                </div>
-                <div class="text-4xl font-bold mt-5 text-white-light js-stat" data-stat="inStockProducts">
-                    {{ $inStockProducts }}
-                </div>
-                <div class="mt-5 text-white-light text-sm font-semibold">
-                    <span class="js-stat-pct" data-of="totalProducts" data-val="{{ $inStockProducts }}">
-                        {{ number_format(($inStockProducts / max($totalProducts, 1)) * 100, 1) }}%
-                    </span>
-                    available
-                </div>
-            </div>
-
             {{-- Categories --}}
             <div class="panel bg-gradient-to-r from-fuchsia-500 to-fuchsia-400">
                 <div class="flex justify-between items-start">
@@ -152,8 +133,6 @@
                         <tr>
                             <th>Product</th>
                             <th>Category</th>
-                            <th>Price</th>
-                            <th>Stock</th>
                             <th>Status</th>
                             <th class="text-center">Actions</th>
                         </tr>
@@ -179,24 +158,6 @@
                                 <span class="badge bg-primary">
                                     {{ $product->categoryRelation->name ?? 'N/A' }}
                                 </span>
-                            </td>
-                            <td>
-                                <p class="font-bold text-primary">₹{{ number_format($product->price, 2) }}</p>
-                                @if($product->offer_price)
-                                    <p class="text-xs text-success line-through text-gray-400">
-                                        ₹{{ number_format($product->price, 2) }}
-                                    </p>
-                                    <p class="text-xs text-success">
-                                        Offer: ₹{{ number_format($product->offer_price, 2) }}
-                                    </p>
-                                @endif
-                            </td>
-                            <td>
-                                @if($product->in_stock)
-                                    <span class="badge badge-outline-success">In Stock</span>
-                                @else
-                                    <span class="badge badge-outline-warning">Out of Stock</span>
-                                @endif
                             </td>
                             <td>
                                 @if($product->is_active)

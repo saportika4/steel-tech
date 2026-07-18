@@ -33,15 +33,13 @@ class DashboardController extends Controller
         $inactiveProducts = Product::where('is_active', false)->count();
         $featuredProducts = Product::where('featured', true)->count();
         $totalCategories  = Category::count();
-        $inStockProducts  = Product::where('in_stock', true)->count();
 
         return compact(
             'totalProducts',
             'activeProducts',
             'inactiveProducts',
             'featuredProducts',
-            'totalCategories',
-            'inStockProducts'
+            'totalCategories'
         );
     }
 }
