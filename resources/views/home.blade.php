@@ -6,6 +6,317 @@
 
 @push('styles')
     <style>
+
+        .product-categories-home .section-title p {
+            max-width: 720px;
+            margin-top: 18px;
+            color: rgba(255, 255, 255, 0.72);
+        }
+
+        .product-categories-home .category-section-cta {
+            margin-top: 20px;
+        }
+
+        .product-categories-home .category-card-item {
+            height: 100%;
+            padding: 32px;
+            border-radius: 24px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.35s ease;
+            backdrop-filter: blur(6px);
+        }
+
+        .product-categories-home .category-card-item:hover {
+            transform: translateY(-6px);
+            border-color: rgba(254, 169, 53, 0.35);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+        }
+
+        .product-categories-home .category-card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .product-categories-home .category-badge-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .product-categories-home .category-chip,
+        .product-categories-home .category-count {
+            display: inline-flex;
+            align-items: center;
+            min-height: 34px;
+            padding: 7px 14px;
+            border-radius: 999px;
+            font-size: 13px;
+            line-height: 1;
+        }
+
+        .product-categories-home .category-chip {
+            background: rgba(254, 169, 53, 0.14);
+            color: #fea935;
+            border: 1px solid rgba(254, 169, 53, 0.2);
+        }
+
+        .product-categories-home .category-count {
+            background: rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .product-categories-home .category-meta-list {
+            margin-bottom: 14px;
+        }
+
+        .product-categories-home .category-meta-list li a {
+            font-size: 14px;
+            color: #fea935;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .product-categories-home .service-item-content-prime h2 {
+            margin-bottom: 16px;
+        }
+
+        .product-categories-home .service-item-content-prime h2 a {
+            color: #fff;
+        }
+
+        .product-categories-home .service-item-content-prime p {
+            color: rgba(255,255,255,0.72);
+            margin-bottom: 0;
+            min-height: 78px;
+        }
+
+        .product-categories-home .category-card-footer {
+            margin-top: 28px;
+            padding-top: 22px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .product-categories-home .readmore-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-categories-home .readmore-btn::after {
+            content: '→';
+            font-size: 16px;
+            transition: transform 0.25s ease;
+        }
+
+        .product-categories-home .category-card-item:hover .readmore-btn::after {
+            transform: translateX(4px);
+        }
+
+        .product-categories-home .service-item-no-prime h2 {
+            color: rgba(255,255,255,0.12);
+            font-size: 52px;
+            line-height: 1;
+            margin: 0;
+        }
+
+        .product-categories-home .category-footer-strip {
+            margin-top: 24px;
+            padding: 24px 30px;
+            border-radius: 22px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .product-categories-home .category-footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .product-categories-home .category-footer-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(254, 169, 53, 0.12);
+            border: 1px solid rgba(254, 169, 53, 0.18);
+            flex-shrink: 0;
+        }
+
+        .product-categories-home .category-footer-icon img {
+            max-width: 22px;
+        }
+
+        .product-categories-home .category-footer-strip p {
+            margin: 0;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .product-categories-home .category-footer-strip p a {
+            color: #fea935;
+        }
+
+        .product-categories-home .category-empty-state {
+            padding: 60px 20px;
+            border-radius: 22px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .product-categories-home .category-empty-state h4 {
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .product-categories-home .category-empty-state p {
+            color: rgba(255,255,255,0.72);
+            margin-bottom: 22px;
+        }
+
+        @media (max-width: 991px) {
+            .product-categories-home .category-section-cta {
+                text-align: left;
+                margin-top: 0;
+            }
+
+            .product-categories-home .category-card-item {
+                padding: 24px;
+            }
+
+            .product-categories-home .service-item-content-prime p {
+                min-height: auto;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .product-categories-home .category-card-top {
+                margin-bottom: 20px;
+            }
+
+            .product-categories-home .service-item-no-prime h2 {
+                font-size: 40px;
+            }
+
+            .product-categories-home .category-footer-strip {
+                padding: 20px;
+            }
+        }
+
+        .hero-slider-wrapper-prime {
+            position: relative;
+        }
+
+        .hero-bg-slide-prime {
+            position: relative;
+            min-height: 760px;
+            display: flex;
+            align-items: center;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        .hero-bg-slide-prime .container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .hero-bg-swiper-pagination {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 35px;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .hero-bg-swiper-pagination .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background: rgba(255,255,255,0.55);
+            opacity: 1;
+            margin: 0 6px !important;
+        }
+
+        .hero-bg-swiper-pagination .swiper-pagination-bullet-active {
+            background: var(--theme-color, #d92626);
+        }
+
+        .hero-bg-swiper-prev,
+        .hero-bg-swiper-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.9);
+            z-index: 10;
+            cursor: pointer;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+
+        .hero-bg-swiper-prev::after,
+        .hero-bg-swiper-next::after {
+            font-family: "swiper-icons";
+            font-size: 16px;
+            color: #111;
+            line-height: 48px;
+            display: block;
+            text-align: center;
+        }
+
+        .hero-bg-swiper-prev {
+            left: 25px;
+        }
+
+        .hero-bg-swiper-next {
+            right: 25px;
+        }
+
+        .hero-bg-swiper-prev::after {
+            content: 'prev';
+        }
+
+        .hero-bg-swiper-next::after {
+            content: 'next';
+        }
+
+        @media (max-width: 991px) {
+            .hero-bg-slide-prime {
+                min-height: 620px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .hero-bg-slide-prime {
+                min-height: 560px;
+                background-position: center center;
+            }
+
+            .hero-bg-swiper-prev,
+            .hero-bg-swiper-next {
+                display: none;
+            }
+
+            .hero-bg-swiper-pagination {
+                bottom: 20px;
+            }
+        }
         .business-partners-grid-prime {
             display: flex;
             flex-wrap: wrap;
@@ -137,32 +448,102 @@
 @endpush
 
     <!-- Hero Section Start -->
-    <div class="hero-prime dark-section parallaxie">
-        <div class="container">
-            <div class="row align-items-end">
-                <div class="col-xl-7 col-lg-7">
-                    <div class="hero-content-prime">
-                        <div class="section-title">
-                            <span class="section-sub-title wow fadeInUp">Authorized VN-J Partner in India</span>
-                            <h1 class="text-anime-style-3" data-cursor="-opaque">Precision CNC Fiber Laser Cutting Machines for Modern Industry</h1>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">Steel Tech Engineering & Equipment Solutions supplies advanced VN-J fiber laser cutting machines with complete sales, installation, operator training, and after-sales support across India.</p>
-                        </div>
+    <div class="hero-slider-wrapper-prime">
+        <div class="swiper heroBgSwiper">
+            <div class="swiper-wrapper">
 
-                        <div class="hero-content-footer-prime wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="hero-btn-prime">
-                                <a href="{{ route('contact') }}" class="btn-default btn-highlighted">Get a Free Quote</a>
+                <div class="swiper-slide">
+                    <section class="hero-prime dark-section hero-bg-slide-prime"
+                        style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('{{ asset('assets/images/about/home1-2.webp') }}');">
+                        <div class="container">
+                            <div class="row align-items-end">
+                                <div class="col-xl-7 col-lg-8">
+                                    <div class="hero-content-prime">
+                                        <div class="section-title">
+                                            <span class="section-sub-title wow fadeInUp">Built for Precision Fabrication</span>
+                                            <h1 class="text-anime-style-3" data-cursor="-opaque">
+                                                Reliable CNC Fiber Laser Machines for Fabricators, OEMs and Engineering Teams
+                                            </h1>
+                                            <p class="wow fadeInUp" data-wow-delay="0.2s">
+                                                Discover precision-built VN-J machines with expert support for machine selection, commissioning, training, and nationwide service response.
+                                            </p>
+                                        </div>
+
+                                        <div class="hero-content-footer-prime wow fadeInUp" data-wow-delay="0.4s">
+                                            <div class="hero-btn-prime">
+                                                <a href="{{ route('products') }}" class="btn-default btn-highlighted">Explore Machines</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
-                            {{-- <div class="video-play-button-prime" data-cursor-text="Play">
-                                <a href="https://www.youtube.com/watch?v=Y-x0efG1seA" class="popup-video">
-                                    <span><i class="fa-solid fa-play"></i></span>
-                                    <p>Watch Our Story</p>
-                                </a>
-                            </div> --}}
                         </div>
-                    </div>
+                    </section>
                 </div>
+
+                <div class="swiper-slide">
+                    <section class="hero-prime dark-section hero-bg-slide-prime"
+                        style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('{{ asset('assets/images/about/home3.webp') }}');">
+                        <div class="container">
+                            <div class="row align-items-end">
+                                <div class="col-xl-7 col-lg-8">
+                                    <div class="hero-content-prime">
+                                        <div class="section-title">
+                                            <span class="section-sub-title wow fadeInUp">Authorized VN-J Partner in India</span>
+                                            <h1 class="text-anime-style-3" data-cursor="-opaque">
+                                                Precision CNC Fiber Laser Cutting Machines for Modern Industry
+                                            </h1>
+                                            <p class="wow fadeInUp" data-wow-delay="0.2s">
+                                                Steel Tech Engineering & Equipment Solutions supplies advanced VN-J fiber laser cutting machines with complete sales, installation, operator training, and after-sales support across India.
+                                            </p>
+                                        </div>
+
+                                        <div class="hero-content-footer-prime wow fadeInUp" data-wow-delay="0.4s">
+                                            <div class="hero-btn-prime">
+                                                <a href="{{ route('contact') }}" class="btn-default btn-highlighted">Get a Free Quote</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="swiper-slide">
+                    <section class="hero-prime dark-section hero-bg-slide-prime"
+                        style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('{{ asset('assets/images/about/hero3.webp') }}');">
+                        <div class="container">
+                            <div class="row align-items-end">
+                                <div class="col-xl-7 col-lg-8">
+                                    <div class="hero-content-prime">
+                                        <div class="section-title">
+                                            <span class="section-sub-title wow fadeInUp">Pan India Sales & Service Support</span>
+                                            <h1 class="text-anime-style-3" data-cursor="-opaque">
+                                                Advanced Laser Cutting Solutions Backed by Local Engineering Teams
+                                            </h1>
+                                            <p class="wow fadeInUp" data-wow-delay="0.2s">
+                                                From consultation and installation to training and after-sales support, Steel Tech delivers dependable CNC laser solutions tailored for industrial fabrication across India.
+                                            </p>
+                                        </div>
+
+                                        <div class="hero-content-footer-prime wow fadeInUp" data-wow-delay="0.4s">
+                                            <div class="hero-btn-prime">
+                                                <a href="{{ route('contact') }}" class="btn-default btn-highlighted">Talk To Our Experts</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
             </div>
+
+            <div class="hero-bg-swiper-pagination"></div>
+            <div class="hero-bg-swiper-prev"></div>
+            <div class="hero-bg-swiper-next"></div>
         </div>
     </div>
     <!-- Hero Section End -->
@@ -351,60 +732,105 @@
     <!-- Why Choose Steel Tech Section End -->
 
     <!-- Product Categories Section Start -->
-    <div class="our-services-prime dark-section">
+    <div class="our-services-prime dark-section product-categories-home">
         <div class="container">
-            <div class="row section-row">
-                <div class="col-lg-12">
-                    <div class="section-title section-title-center">
+            <div class="row section-row align-items-end">
+                <div class="col-lg-8">
+                    <div class="section-title">
                         <span class="section-sub-title wow fadeInUp">Product Categories</span>
-                        <h2 class="text-anime-style-3" data-cursor="-opaque">VN-J CNC Fiber Laser Cutting Machine Series</h2>
+                        <h2 class="text-anime-style-3" data-cursor="-opaque">
+                            CNC Fiber Laser Cutting Machine Series
+                        </h2>
+                        <p class="wow fadeInUp" data-wow-delay="0.2s">
+                            Explore our machine categories built for fabrication, sheet processing, tube cutting, and industrial metalworking applications.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 text-lg-end">
+                    <div class="category-section-cta wow fadeInUp" data-wow-delay="0.3s">
+                        <a href="{{ route('products') }}" class="btn-default">View All Products</a>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row g-4">
                 @forelse($categories as $index => $category)
-                <div class="col-xl-4 col-md-6">
-                    <div class="service-item-prime wow fadeInUp" data-wow-delay="{{ ($index % 3) * 0.2 }}s">
-                        <div class="service-item-content-prime">
-                            <ul>
-                                <li><a href="{{ route('products.category', $category->slug) }}">CNC Laser Cutting</a></li>
-                            </ul>
-                            <h2><a href="{{ route('products.category', $category->slug) }}">{{ $category->name }}</a></h2>
-                            <p>{{ $category->description ?? 'Precision engineered VN-J laser cutting machines for industrial fabrication.' }}</p>
-                        </div>
+                    @php
+                        $productCount = $category->products_count ?? $category->products?->count() ?? 0;
+                        $shortDescription = $category->description
+                            ? \Illuminate\Support\Str::limit(strip_tags($category->description), 115)
+                            : 'Precision-engineered laser cutting systems designed for demanding industrial production environments.';
+                    @endphp
 
-                        <div class="service-item-btn-prime">
-                            <a href="{{ route('products.category', $category->slug) }}" class="readmore-btn">View Models</a>
-                        </div>
+                    <div class="col-xl-4 col-md-6">
+                        <div class="service-item-prime category-card-item wow fadeInUp" data-wow-delay="{{ ($index % 3) * 0.2 }}s">
+                            <div class="category-card-top">
+                                <div class="category-badge-wrap">
+                                    <span class="category-chip">Machine Category</span>
+                                    <span class="category-count">{{ str_pad($productCount, 2, '0', STR_PAD_LEFT) }} Models</span>
+                                </div>
 
-                        <div class="service-item-no-prime">
-                            <h2>{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</h2>
+                                <div class="service-item-no-prime">
+                                    <h2>{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</h2>
+                                </div>
+                            </div>
+
+                            <div class="service-item-content-prime">
+                                <ul class="category-meta-list">
+                                    <li>
+                                        <a href="{{ route('products', ['category' => $category->slug]) }}">
+                                            {{ $category->name }}
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <h2>
+                                    <a href="{{ route('products', ['category' => $category->slug]) }}">
+                                        {{ $category->name }}
+                                    </a>
+                                </h2>
+
+                                <p>{{ $shortDescription }}</p>
+                            </div>
+
+                            <div class="service-item-btn-prime category-card-footer">
+                                <a href="{{ route('products', ['category' => $category->slug]) }}" class="readmore-btn">
+                                    Explore Category
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
                 @empty
-                <div class="col-lg-12">
-                    <p class="text-center">Product categories coming soon.</p>
-                </div>
+                    <div class="col-lg-12">
+                        <div class="category-empty-state text-center wow fadeInUp">
+                            <h4>Product categories coming soon</h4>
+                            <p>We are organizing our machine range and category pages for a better browsing experience.</p>
+                            <a href="{{ route('products') }}" class="btn-default">Browse All Products</a>
+                        </div>
+                    </div>
                 @endforelse
+            </div>
 
-                <div class="col-lg-12">
-                    <div class="section-footer-text section-satisfy-img wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="satisfy-client-images">
-                            <div class="satisfy-client-image">
-                                <figure class="image-anime">
-                                    <img src="{{ asset('assets/images/author-1.jpg') }}" alt="">
-                                </figure>
-                            </div>
-                            <div class="satisfy-client-image add-more">
-                                <img src="{{ asset('assets/images/icon-phone-white.svg') }}" alt="">
+            @if($categories->count())
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-footer-text category-footer-strip wow fadeInUp" data-wow-delay="0.6s">
+                            <div class="category-footer-content">
+                                <div class="category-footer-icon">
+                                    <img src="{{ asset('assets/images/icon-phone-white.svg') }}" alt="Contact icon">
+                                </div>
+                                <p>
+                                    Need help choosing the right laser cutting machine for your application?
+                                    <a href="{{ route('contact') }}">Talk to our team</a>
+                                    or
+                                    <a href="{{ route('products') }}">view the complete range</a>.
+                                </p>
                             </div>
                         </div>
-                        <p>Explore our complete machine range. <a href="{{ route('products') }}">View all products</a></p>
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
     <!-- Product Categories Section End -->
@@ -496,6 +922,164 @@
         </div>
     </div>
     <!-- Industries Served Section End -->
+
+     <!-- Testimonial Section Start -->
+    <div class="our-testimonials dark-section">
+        <div class="container">
+            <div class="row section-row">
+                <div class="col-lg-12">
+                    <div class="section-title section-title-center">
+                        <span class="section-sub-title wow fadeInUp">Our Testimonials</span>
+                        <h2 class="text-anime-style-3" data-cursor-opaque>What customers say about Steel Tech</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="testimonial-slider wow fadeInUp">
+                        <div class="swiper">
+                            <div class="swiper-wrapper" data-cursor-text="Drag">
+
+                                <div class="swiper-slide">
+                                    <div class="testimonial-item">
+                                        <div class="testimonial-item-header">
+                                            <div class="testimonial-item-rating">
+                                                <p>5.0 Review</p>
+                                                <span class="testimonial-item-rating-star">
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                </span>
+                                            </div>
+                                            <div class="testimonial-item-content">
+                                                <p>“I have been working with Steeltech Lasers for the past 2 years. I have received the best quality CNC Laser cutting works with timely delivery.”</p>
+                                            </div>
+                                        </div>
+                                        <div class="testimonial-author-box">
+                                            <div class="testimonial-author-content">
+                                                <h2>Benson Gipson</h2>
+                                                <p>Google Review</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <div class="testimonial-item">
+                                        <div class="testimonial-item-header">
+                                            <div class="testimonial-item-rating">
+                                                <p>5.0 Review</p>
+                                                <span class="testimonial-item-rating-star">
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                </span>
+                                            </div>
+                                            <div class="testimonial-item-content">
+                                                <p>“Only authorised dealer of Accurl CNC machine in South India, very good people also, and good service.”</p>
+                                            </div>
+                                        </div>
+                                        <div class="testimonial-author-box">
+                                            <div class="testimonial-author-content">
+                                                <h2>Flycut CNC</h2>
+                                                <p>Google Review</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <div class="testimonial-item">
+                                        <div class="testimonial-item-header">
+                                            <div class="testimonial-item-rating">
+                                                <p>5.0 Review</p>
+                                                <span class="testimonial-item-rating-star">
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                </span>
+                                            </div>
+                                            <div class="testimonial-item-content">
+                                                <p>“Good service provided for laser and bending machine.”</p>
+                                            </div>
+                                        </div>
+                                        <div class="testimonial-author-box">
+                                            <div class="testimonial-author-content">
+                                                <h2>SUDHEESH KUMAR S</h2>
+                                                <p>Google Review</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <div class="testimonial-item">
+                                        <div class="testimonial-item-header">
+                                            <div class="testimonial-item-rating">
+                                                <p>5.0 Review</p>
+                                                <span class="testimonial-item-rating-star">
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                </span>
+                                            </div>
+                                            <div class="testimonial-item-content">
+                                                <p>“Clear and detailed information about any query. Great.”</p>
+                                            </div>
+                                        </div>
+                                        <div class="testimonial-author-box">
+                                            <div class="testimonial-author-content">
+                                                <h2>Jaiz L</h2>
+                                                <p>Google Review</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="section-footer-text section-satisfy-img wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="satisfy-client-images">
+                            <div class="satisfy-client-image">
+                                <figure class="image-anime">
+                                    <img src="{{ asset('assets/images/author-1.jpg') }}" alt="Steel Tech customer feedback">
+                                </figure>
+                            </div>
+                            <div class="satisfy-client-image add-more">
+                                <img src="{{ asset('assets/images/icon-phone-white.svg') }}" alt="Contact Steel Tech">
+                            </div>
+                        </div>
+                        <p>Trusted by fabrication and machinery customers across India. <a href="{{ route('contact') }}">Talk to our team.</a></p>
+                        <ul>
+                            <li><span class="counter">4.9</span></li>
+                            <li>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </li>
+                            <li>Based on Google Reviews</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial Section End -->
 
     <!-- Business Partners Section Start -->
     <div class="our-benefits-prime light-section">
@@ -771,6 +1355,29 @@
                 }
             });
 
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            new Swiper('.heroBgSwiper', {
+                loop: true,
+                effect: 'slide',
+                speed: 1000,
+                grabCursor: true,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false
+                },
+                pagination: {
+                    el: '.hero-bg-swiper-pagination',
+                    clickable: true
+                },
+                navigation: {
+                    nextEl: '.hero-bg-swiper-next',
+                    prevEl: '.hero-bg-swiper-prev'
+                }
+            });
         });
     </script>
 

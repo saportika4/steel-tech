@@ -11,6 +11,11 @@ class Product extends Model
         'category_id',
         'name',
         'slug',
+        'manufacturer',
+        'machine_type',
+        'applications',
+        'available_models',
+        'specifications',
         'description',
         'image',
         'featured',
@@ -21,10 +26,15 @@ class Product extends Model
     protected function casts(): array
     {
         return [
-            'featured'  => 'boolean',
-            'is_active' => 'boolean',
+            'featured'         => 'boolean',
+            'is_active'        => 'boolean',
+            'applications'     => 'array',
+            'available_models' => 'array',
+            'specifications'   => 'array',
         ];
     }
+
+    protected $appends = ['image_url'];
 
     public function category()
     {
@@ -41,6 +51,7 @@ class Product extends Model
         if ($this->image && file_exists(public_path('storage/' . $this->image))) {
             return asset('storage/' . $this->image);
         }
+
         return asset('assets/images/placeholder-product.png');
     }
 

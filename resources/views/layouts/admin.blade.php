@@ -368,6 +368,87 @@
                         </li>
 
                         <h2 class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 -mx-4 mb-1 mt-4">
+                            <span>GALLERY</span>
+                        </h2>
+
+                        <li class="menu nav-item">
+                            <a href="{{ route('admin.gallery.index') }}" class="group {{ request()->routeIs('admin.gallery.index') ? 'active' : '' }}">
+                                <div class="flex items-center">
+                                    <svg class="group-hover:!text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                                        <circle cx="8.5" cy="10" r="1.5" stroke="currentColor" stroke-width="1.5"/>
+                                        <path opacity="0.5" d="M5.5 17L10 12.5C10.4 12.1 11.1 12.1 11.5 12.5L14 15L15.5 13.5C15.9 13.1 16.6 13.1 17 13.5L18.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span class="ltr:pl-3 rtl:pr-3 text-black">All Images</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="menu nav-item">
+                            <a href="{{ route('admin.gallery.create') }}" class="group {{ request()->routeIs('admin.gallery.create') ? 'active' : '' }}">
+                                <div class="flex items-center">
+                                    <svg class="group-hover:!text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="3" y="5" width="12" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                                        <circle cx="7.5" cy="9" r="1.2" stroke="currentColor" stroke-width="1.5"/>
+                                        <path opacity="0.5" d="M5 13L8 10.5C8.4 10.2 8.9 10.2 9.3 10.5L12 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M19 8V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path d="M15 12H23" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                    <span class="ltr:pl-3 rtl:pr-3 text-black">Add Image</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <h2 class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 -mx-4 mb-1 mt-4">
+                            <span>CAREERS</span>
+                        </h2>
+
+                        <li class="menu nav-item">
+                            <a href="{{ route('admin.careers.index') }}" class="group {{ request()->routeIs('admin.careers.index') ? 'active' : '' }}">
+                                <div class="flex items-center">
+                                    <svg class="group-hover:!text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="3" y="7" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                                        <path opacity="0.5" d="M9 7V6C9 4.89543 9.89543 4 11 4H13C14.1046 4 15 4.89543 15 6V7" stroke="currentColor" stroke-width="1.5"/>
+                                        <path d="M3 12H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path d="M14 12H21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path d="M10 11V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path d="M14 11V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                    <span class="ltr:pl-3 rtl:pr-3 text-black">All Openings</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="menu nav-item">
+                            <a href="{{ route('admin.career-applications.index') }}" class="group {{ request()->routeIs('admin.career-applications.*') ? 'active' : '' }}">
+                                <div class="flex items-center">
+                                    <svg class="group-hover:!text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7 8H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path d="M7 12H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path d="M7 16H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path opacity="0.5" d="M6 3H14.5858C15.1162 3 15.6249 3.21071 16 3.58579L19.4142 7C19.7893 7.37507 20 7.88378 20 8.41421V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V5C4 3.89543 4.89543 3 6 3Z" stroke="currentColor" stroke-width="1.5"/>
+                                        <path opacity="0.5" d="M14 3V7C14 8.10457 14.8954 9 16 9H20" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                    <span class="ltr:pl-3 rtl:pr-3 text-black">Applications</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="menu nav-item">
+                            <a href="{{ route('admin.careers.create') }}" class="group {{ request()->routeIs('admin.careers.create') ? 'active' : '' }}">
+                                <div class="flex items-center">
+                                    <svg class="group-hover:!text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="3" y="7" width="12" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                                        <path opacity="0.5" d="M7.5 7V6C7.5 4.89543 8.39543 4 9.5 4H10.5C11.6046 4 12.5 4.89543 12.5 6V7" stroke="currentColor" stroke-width="1.5"/>
+                                        <path d="M19 8V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path d="M15 12H23" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                    <span class="ltr:pl-3 rtl:pr-3 text-black">Add Opening</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <h2 class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 -mx-4 mb-1 mt-4">
                             <span>OTHERS</span>
                         </h2>
 

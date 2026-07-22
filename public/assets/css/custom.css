@@ -4842,8 +4842,8 @@ header.main-header .header-sticky.active{
 }
 
 .page-gallery-box .photo-gallery{
-	height: calc(100% - 30px);
-	margin-bottom: 30px;
+	/* height: calc(100% - 30px); */
+	/* margin-bottom: 30px; */
 }
 
 .page-gallery-box .photo-gallery a{
@@ -7270,8 +7270,8 @@ header.main-header .header-sticky.active{
 
 .service-item-no-prime{
 	position: absolute;
-	bottom: -35px;
-	right: -5px;
+	bottom: 5px;
+	right: 10px;
 	transition: all 0.5s ease-in-out;
 }
 

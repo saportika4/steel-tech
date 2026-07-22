@@ -6,6 +6,61 @@
 
 @push('styles')
 <style>
+
+    .product-card-wrap {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .product-card-wrap:hover {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .product-card-wrap:hover .product-card-link span {
+        color: var(--theme-color, #d92626);
+    }
+
+    .product-card-meta {
+        margin-top: 12px;
+        text-align: center;
+    }
+
+    .product-category {
+        margin-top: 0;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--theme-color, #d92626);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .product-manufacturer {
+        margin-top: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #666;
+    }
+
+    .product-card-link {
+        margin-top: 14px;
+        text-align: center;
+    }
+
+    .product-card-link a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--main-black-color, #1a1a1a);
+        transition: all 0.3s ease;
+    }
+
+    .product-card-link a:hover {
+        color: var(--theme-color, #d92626);
+    }
     .products-filter-bar {
         margin-bottom: 50px;
     }
@@ -292,6 +347,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const filterButtons = document.querySelectorAll('.filter-btn');
 
+    if (window.jQuery && $.fn.magnificPopup) {
+        try {
+            $('.image-popup').magnificPopup('destroy');
+            $('#productsGrid').magnificPopup('destroy');
+            $('.page-gallery').magnificPopup('destroy');
+        } catch (e) {}
+    }
+
+    document.addEventListener('click', function (e) {
+        const card = e.target.closest('.product-card-wrap');
+        if (!card) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+        window.location.href = card.getAttribute('href');
+    }, true);
+
     // Set active filter from URL
     filterButtons.forEach(btn => {
         btn.classList.remove('active');
@@ -309,42 +381,26 @@ document.addEventListener('DOMContentLoaded', function () {
     function cardTemplate(product) {
         return `
         <div class="col-lg-4 col-md-6 col-12 product-grid-item">
-            <div class="photo-gallery wow fadeInUp">
-                <a href="${product.image}" class="image-popup">
+            <a href="${product.url}" class="product-card-wrap">
+                <div class="photo-gallery wow fadeInUp">
                     <figure class="image-anime">
                         <img src="${product.image}" alt="${product.name}">
                     </figure>
-                </a>
 
-                <div class="product-gallery-caption">
-                    <h3>${product.name}</h3>
+                    <div class="product-gallery-caption">
+                        <h3>${product.name}</h3>
+                    </div>
                 </div>
-            </div>
 
-            <div class="product-category">
-                ${product.category}
-            </div>
+                <div class="product-card-meta">
+                    <div class="product-category">${product.category ?? ''}</div>
+                    ${product.manufacturer ? `<div class="product-manufacturer">${product.manufacturer}</div>` : ''}
+                    <div class="product-card-link">
+                        <span>View Details <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </a>
         </div>`;
-    }
-
-    function initGallery() {
-        if ($.fn.magnificPopup) {
-            $('.image-popup').magnificPopup('destroy');
-
-            $('.image-popup').magnificPopup({
-                type: 'image',
-                gallery: {
-                    enabled: true
-                },
-                closeOnContentClick: false,
-                closeBtnInside: true,
-                mainClass: 'mfp-with-zoom',
-                zoom: {
-                    enabled: true,
-                    duration: 300
-                }
-            });
-        }
     }
 
     function loadProducts(reset = false) {
@@ -384,8 +440,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             loader.style.display = 'none';
             isLoading = false;
-
-            initGallery();
 
             if (window.WOW) {
                 new WOW().init();
@@ -427,15 +481,15 @@ document.addEventListener('DOMContentLoaded', function () {
         clearTimeout(scrollTimeout);
 
         scrollTimeout = setTimeout(function () {
+            if (!grid || isLoading || !hasMore) return;
 
-            const scrollPosition = window.innerHeight + window.scrollY;
-            const threshold = document.body.offsetHeight - 400;
+            const gridRect = grid.getBoundingClientRect();
+            const triggerOffset = 700;
 
-            if (scrollPosition >= threshold) {
+            if (gridRect.bottom <= window.innerHeight + triggerOffset) {
                 loadProducts(false);
             }
-
-        }, 150);
+        }, 120);
     });
 
     loadProducts(true);

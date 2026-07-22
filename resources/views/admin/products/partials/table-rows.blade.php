@@ -5,7 +5,10 @@
         <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="w-16 h-16 rounded-lg object-cover">
     </td>
     <td>
-        <div class="whitespace-nowrap font-semibold">{{ $product->name }}</div>
+        <div class="font-semibold">{{ $product->name }}</div>
+        @if($product->manufacturer)
+            <div class="text-xs text-gray-500 mt-1">{{ $product->manufacturer }}</div>
+        @endif
     </td>
     <td>
         @if($product->categoryRelation)
@@ -27,9 +30,7 @@
     </td>
     <td>
         <div class="flex gap-2">
-            <a href="{{ route('admin.products.edit', $product->id) }}"
-               class="btn btn-sm btn-info"
-               title="Edit">
+            <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-info" title="Edit">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
                     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                     <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
@@ -51,7 +52,7 @@
 </tr>
 @empty
 <tr>
-    <td colspan="8" class="text-center py-8">
+    <td colspan="6" class="text-center py-8">
         <div class="text-muted">
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-3 opacity-50">
                 <circle cx="12" cy="12" r="10"></circle>

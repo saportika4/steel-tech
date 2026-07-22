@@ -21,6 +21,8 @@ class ProductController extends Controller
             $search = trim($request->search);
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('manufacturer', 'like', "%{$search}%")
+                    ->orWhere('machine_type', 'like', "%{$search}%")
                     ->orWhere('description', 'like', "%{$search}%");
             });
         }
@@ -36,7 +38,7 @@ class ProductController extends Controller
         $sortBy = $request->get('sort_by', 'id');
         $sortDirection = $request->get('sort_direction', 'desc');
 
-        $allowedSorts = ['id', 'name', 'sort_order', 'created_at'];
+        $allowedSorts = ['id', 'name', 'manufacturer', 'sort_order', 'created_at'];
         $sortDirection = in_array($sortDirection, ['asc', 'desc']) ? $sortDirection : 'desc';
 
         if ($sortBy === 'category') {
@@ -82,11 +84,20 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             'category_id' => ['required', 'exists:categories,id'],
-            'name'        => ['required', 'string', 'max:255', 'unique:products,name'],
+            'name' => ['required', 'string', 'max:255', 'unique:products,name'],
+            'manufacturer' => ['nullable', 'string', 'max:255'],
+            'machine_type' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'image'       => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:120'],
-            'is_active'   => ['nullable', 'boolean'],
-            'featured'    => ['nullable', 'boolean'],
+            'applications' => ['nullable', 'array'],
+            'applications.*' => ['nullable', 'string', 'max:255'],
+            'available_models' => ['nullable', 'array'],
+            'available_models.*' => ['nullable', 'string', 'max:255'],
+            'specifications' => ['nullable', 'array'],
+            'specifications.*.label' => ['nullable', 'string', 'max:255'],
+            'specifications.*.value' => ['nullable', 'string', 'max:1000'],
+            'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:120'],
+            'is_active' => ['nullable', 'boolean'],
+            'featured' => ['nullable', 'boolean'],
         ]);
 
         DB::beginTransaction();
@@ -96,13 +107,18 @@ class ProductController extends Controller
 
             $product = Product::create([
                 'category_id' => $validated['category_id'],
-                'name'        => $validated['name'],
-                'slug'        => $this->generateUniqueSlug($validated['name']),
+                'name' => $validated['name'],
+                'slug' => $this->generateUniqueSlug($validated['name']),
+                'manufacturer' => $validated['manufacturer'] ?? null,
+                'machine_type' => $validated['machine_type'] ?? null,
                 'description' => $validated['description'] ?? null,
-                'image'       => $imagePath,
-                'is_active'   => $request->boolean('is_active'),
-                'featured'    => $request->boolean('featured'),
-                'sort_order'  => 0,
+                'applications' => $this->cleanSimpleArray($validated['applications'] ?? []),
+                'available_models' => $this->cleanSimpleArray($validated['available_models'] ?? []),
+                'specifications' => $this->cleanSpecifications($validated['specifications'] ?? []),
+                'image' => $imagePath,
+                'is_active' => $request->boolean('is_active'),
+                'featured' => $request->boolean('featured'),
+                'sort_order' => 0,
             ]);
 
             DB::commit();
@@ -114,22 +130,47 @@ class ProductController extends Controller
             ]);
         } catch (\Throwable $e) {
             DB::rollBack();
+
             if (isset($imagePath)) {
                 Storage::disk('public')->delete($imagePath);
             }
-            return response()->json(['success' => false, 'message' => 'Failed to create product.'], 500);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to create product.',
+                'error' => $e->getMessage(),
+            ], 500);
         }
+    }
+
+    public function edit(Product $product)
+    {
+        $categories = Category::where('is_active', true)
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->get();
+
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     public function update(Request $request, Product $product)
     {
         $validated = $request->validate([
             'category_id' => ['required', 'exists:categories,id'],
-            'name'        => ['required', 'string', 'max:255', Rule::unique('products', 'name')->ignore($product->id)],
+            'name' => ['required', 'string', 'max:255', Rule::unique('products', 'name')->ignore($product->id)],
+            'manufacturer' => ['nullable', 'string', 'max:255'],
+            'machine_type' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'image'       => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:120'],
-            'is_active'   => ['nullable', 'boolean'],
-            'featured'    => ['nullable', 'boolean'],
+            'applications' => ['nullable', 'array'],
+            'applications.*' => ['nullable', 'string', 'max:255'],
+            'available_models' => ['nullable', 'array'],
+            'available_models.*' => ['nullable', 'string', 'max:255'],
+            'specifications' => ['nullable', 'array'],
+            'specifications.*.label' => ['nullable', 'string', 'max:255'],
+            'specifications.*.value' => ['nullable', 'string', 'max:1000'],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:120'],
+            'is_active' => ['nullable', 'boolean'],
+            'featured' => ['nullable', 'boolean'],
         ]);
 
         DB::beginTransaction();
@@ -137,10 +178,15 @@ class ProductController extends Controller
         try {
             $data = [
                 'category_id' => $validated['category_id'],
-                'name'        => $validated['name'],
+                'name' => $validated['name'],
+                'manufacturer' => $validated['manufacturer'] ?? null,
+                'machine_type' => $validated['machine_type'] ?? null,
                 'description' => $validated['description'] ?? null,
-                'is_active'   => $request->boolean('is_active'),
-                'featured'    => $request->boolean('featured'),
+                'applications' => $this->cleanSimpleArray($validated['applications'] ?? []),
+                'available_models' => $this->cleanSimpleArray($validated['available_models'] ?? []),
+                'specifications' => $this->cleanSpecifications($validated['specifications'] ?? []),
+                'is_active' => $request->boolean('is_active'),
+                'featured' => $request->boolean('featured'),
             ];
 
             if ($product->name !== $validated['name']) {
@@ -161,24 +207,23 @@ class ProductController extends Controller
 
             DB::commit();
 
-            return response()->json(['success' => true, 'message' => 'Product updated successfully.']);
+            return response()->json([
+                'success' => true,
+                'message' => 'Product updated successfully.'
+            ]);
         } catch (\Throwable $e) {
             DB::rollBack();
+
             if (isset($newImagePath)) {
                 Storage::disk('public')->delete($newImagePath);
             }
-            return response()->json(['success' => false, 'message' => 'Failed to update product.'], 500);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update product.',
+                'error' => $e->getMessage(),
+            ], 500);
         }
-    }
-
-    public function edit(Product $product)
-    {
-        $categories = Category::where('is_active', true)
-            ->orderBy('sort_order')
-            ->orderBy('name')
-            ->get();
-
-        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     public function destroy(Product $product)
@@ -233,4 +278,33 @@ class ProductController extends Controller
         return $slug;
     }
 
+    private function cleanSimpleArray(array $items): array
+    {
+        return collect($items)
+            ->map(fn ($item) => is_string($item) ? trim($item) : $item)
+            ->filter(fn ($item) => filled($item))
+            ->values()
+            ->toArray();
+    }
+
+    private function cleanSpecifications(array $items): array
+    {
+        return collect($items)
+            ->map(function ($item) {
+                $label = trim($item['label'] ?? '');
+                $value = trim($item['value'] ?? '');
+
+                if ($label === '' && $value === '') {
+                    return null;
+                }
+
+                return [
+                    'label' => $label,
+                    'value' => $value,
+                ];
+            })
+            ->filter()
+            ->values()
+            ->toArray();
+    }
 }

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactEnquiryMail;
+use App\Models\Career;
+use App\Models\CareerApplication;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use App\Mail\ContactEnquiryMail;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 
 class PageController extends Controller
@@ -54,22 +57,25 @@ class PageController extends Controller
             });
         }
 
-        $paginator = $query->orderBy('sort_order')
+        $paginator = $query
+            ->orderBy('sort_order')
             ->paginate($perPage, ['*'], 'page', $page);
 
         $products = $paginator->getCollection()->map(function ($product) {
             return [
                 'name' => $product->name,
+                'slug' => $product->slug,
                 'image' => $product->image ? asset('storage/' . $product->image) : asset('assets/images/gallery-1.jpg'),
-                'url' => route('products', $product->slug),
                 'category' => $product->category->name ?? '',
+                'manufacturer' => $product->manufacturer ?? '',
+                'url' => route('products.show', $product->slug),
             ];
-        });
+        })->values();
 
         return response()->json([
             'products' => $products,
             'has_more' => $paginator->hasMorePages(),
-            'next_page' => $page + 1,
+            'next_page' => $paginator->hasMorePages() ? $page + 1 : null,
             'total' => $paginator->total(),
         ]);
     }
@@ -82,16 +88,24 @@ class PageController extends Controller
         return view('products.category', compact('category', 'products', 'categories'));
     }
 
-    public function productShow(Product $product)
+    public function productShow($slug)
     {
-        $product->load('category');
-        $related = Product::active()
-            ->where('category_id', $product->category_id)
+        $product = Product::with('category')
+            ->where('slug', $slug)
+            ->where('is_active', 1)
+            ->firstOrFail();
+
+        $relatedProducts = Product::with('category')
+            ->where('is_active', 1)
             ->where('id', '!=', $product->id)
-            ->take(4)
+            ->when($product->category_id, function ($query) use ($product) {
+                $query->where('category_id', $product->category_id);
+            })
+            ->latest()
+            ->take(6)
             ->get();
 
-        return view('products.show', compact('product', 'related'));
+        return view('product-details', compact('product', 'relatedProducts'));
     }
 
     public function contact()
@@ -128,5 +142,125 @@ class PageController extends Controller
                 'message' => $e->getMessage()
             ], 500);
         }
+    }
+
+    public function gallery()
+    {
+        return view('gallery');
+    }
+
+    public function galleryAjax(Request $request)
+    {
+        $request->validate(['page' => ['nullable', 'integer', 'min:1']]);
+
+        $perPage = 6;
+        $page = (int) $request->input('page', 1);
+
+        $paginator = \App\Models\Gallery::active()->ordered()->paginate($perPage, ['*'], 'page', $page);
+
+        $images = $paginator->getCollection()->map(function ($item) {
+            return [
+                'title' => $item->title,
+                'description' => $item->description,
+                'image' => $item->image_url,
+            ];
+        });
+
+        return response()->json([
+            'images' => $images,
+            'has_more' => $paginator->hasMorePages(),
+            'next_page' => $paginator->hasMorePages() ? $page + 1 : null,
+        ]);
+    }
+
+    public function careers()
+    {
+        return view('careers.index');
+    }
+
+    public function careerShow(Career $career)
+    {
+        abort_unless($career->is_active, 404);
+
+        $relatedCareers = Career::active()
+            ->where('id', '!=', $career->id)
+            ->ordered()
+            ->take(3)
+            ->get();
+
+        return view('careers.show', compact('career', 'relatedCareers'));
+    }
+
+    public function careersAjax(Request $request)
+    {
+        $request->validate([
+            'page' => ['nullable', 'integer', 'min:1'],
+        ]);
+
+        $page = (int) $request->input('page', 1);
+        $perPage = 6;
+
+        $paginator = Career::active()
+            ->ordered()
+            ->paginate($perPage, ['*'], 'page', $page);
+
+        $careers = $paginator->getCollection()->map(function ($career) {
+            return [
+                'title' => $career->title,
+                'slug' => $career->slug,
+                'location' => $career->location,
+                'employment_type' => $career->employment_type,
+                'department' => $career->department,
+                'vacancies' => $career->vacancies,
+                'short_description' => $career->short_description,
+                'details_url' => route('careers.show', $career->slug),
+                'apply_url' => route('careers.apply', $career->slug),
+            ];
+        });
+
+        return response()->json([
+            'success' => true,
+            'careers' => $careers,
+            'has_more' => $paginator->hasMorePages(),
+            'next_page' => $paginator->hasMorePages() ? $page + 1 : null,
+        ]);
+    }
+
+    public function careerApply(Request $request, Career $career)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:30'],
+            'message' => ['nullable', 'string'],
+            'resume' => ['required', 'file', 'mimes:pdf,doc,docx', 'max:5120'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Please correct the highlighted fields.',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $application = CareerApplication::create([
+            'career_id' => $career->id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'message' => $request->message,
+            'resume' => $request->file('resume')->store('career-resumes', 'public'),
+            'status' => 'new',
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Your application has been submitted successfully.',
+            'data' => [
+                'id' => $application->id,
+                'career' => $career->title,
+            ],
+        ]);
     }
 }

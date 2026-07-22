@@ -1,8 +1,9 @@
-@if($products->hasPages())
+@if ($products->hasPages())
     <div class="pagination-wrapper">
         <div class="pagination-info">
-            Showing {{ $products->firstItem() }} to {{ $products->lastItem() }} of {{ $products->total() }} products
+            Showing {{ $products->firstItem() }} to {{ $products->lastItem() }} of {{ $products->total() }} entries
         </div>
-        {{ $products->onEachSide(1)->links('vendor.pagination.bootstrap-4') }}
+
+        {{ $products->links() }}
     </div>
 @endif

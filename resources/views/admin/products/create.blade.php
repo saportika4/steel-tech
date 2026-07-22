@@ -4,17 +4,6 @@
 
 @section('content')
 <div class="panel">
-    <div class="flex items-center justify-between mb-5">
-        <h5 class="font-semibold text-lg dark:text-white-light">Add New Product</h5>
-        <a href="{{ route('admin.products.index') }}" class="btn btn-outline-danger gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-            Cancel
-        </a>
-    </div>
-
     @include('admin.products.partials.form')
 </div>
 @endsection
@@ -32,9 +21,16 @@ function previewImage(event) {
             const icon = document.querySelector('#imagePreviewContainer svg');
             if (icon) icon.classList.add('hidden');
             document.getElementById('fileName').textContent = 'Selected: ' + file.name;
-        }
+        };
         reader.readAsDataURL(file);
     }
+}
+
+function refreshSpecIndexes() {
+    $('#specificationsWrapper .spec-row').each(function(index) {
+        $(this).find('input').eq(0).attr('name', `specifications[${index}][label]`);
+        $(this).find('input').eq(1).attr('name', `specifications[${index}][value]`);
+    });
 }
 
 $(document).ready(function () {
@@ -53,6 +49,42 @@ $(document).ready(function () {
                 showConfirmButton: false
             });
         });
+    });
+
+    $('#addApplicationBtn').on('click', function () {
+        $('#applicationsWrapper').append(`
+            <div class="repeater-item compact-row application-row">
+                <input type="text" name="applications[]" class="form-input" placeholder="Enter application">
+                <button type="button" class="repeater-remove-btn remove-row" title="Remove row">×</button>
+            </div>
+        `);
+    });
+
+    $('#addModelBtn').on('click', function () {
+        $('#modelsWrapper').append(`
+            <div class="repeater-item compact-row model-row">
+                <input type="text" name="available_models[]" class="form-input" placeholder="Enter model name">
+                <button type="button" class="repeater-remove-btn remove-row" title="Remove row">×</button>
+            </div>
+        `);
+    });
+
+    $('#addSpecBtn').on('click', function () {
+        const index = $('#specificationsWrapper .spec-row').length;
+        $('#specificationsWrapper').append(`
+            <div class="repeater-item spec-row">
+                <div class="spec-grid">
+                    <input type="text" name="specifications[${index}][label]" class="form-input" placeholder="Specification label">
+                    <input type="text" name="specifications[${index}][value]" class="form-input" placeholder="Specification value">
+                    <button type="button" class="repeater-remove-btn remove-row" title="Remove specification">×</button>
+                </div>
+            </div>
+        `);
+    });
+
+    $(document).on('click', '.remove-row', function () {
+        $(this).closest('.application-row, .model-row, .spec-row').remove();
+        refreshSpecIndexes();
     });
 
     $('#createProductForm').on('submit', function(e) {
