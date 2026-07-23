@@ -5091,7 +5091,7 @@ header.main-header .header-sticky.active{
 }
 
 .contact-info-item-content{
-	width: calc(100% - 65px);
+	/* width: calc(100% - 65px); */
 }
 
 .contact-info-item-content p{

@@ -292,10 +292,11 @@
                                     <div class="contact-info-item-content">
                                         <span>Head Office</span>
 
+                                        <h4>STEEL TECH ENGINEERING & EQUIPMENT SOLUTIONS</h4>
                                         <p>
-                                            9/228A, Kunnukara,
-                                            Kunnukara PO,
-                                            Kochi, Kerala 683578
+                                            Muneshwaranagar, Second Floor,<br>
+                                            No.61, 4th Cross Pipe Line Road,<br>
+                                            Mallasandra, Bengaluru, Karnataka 560057
                                         </p>
                                     </div>
                                 </div>
@@ -392,9 +393,9 @@
                 <div class="col-lg-12">
                     <!-- Section Title Start -->
                     <div class="section-title section-title-center">
-                        <span class="section-sub-title wow fadeInUp">Head Office</span>
-                        <h2 class="text-anime-style-3" data-cursor="-opaque">Find us in Kochi, Kerala</h2>
-                        <p class="wow fadeInUp" data-wow-delay="0.2s">9/228A, Kunnukara, Kunnukara PO, Kochi, Kerala 683578. We also have offices in Bangalore, Coimbatore, Chennai, Hyderabad, Ahmedabad & Surat for Pan India support.</p>
+                        <span class="section-sub-title wow fadeInUp">Location</span>
+                        {{-- <h2 class="text-anime-style-3" data-cursor="-opaque">Find us in Kochi, Kerala</h2> --}}
+                        <p class="wow fadeInUp" data-wow-delay="0.2s">We also have offices in Bangalore, Coimbatore, Chennai, Hyderabad, Ahmedabad & Surat for Pan India support.</p>
                     </div>
                     <!-- Section Title End -->
                 </div>

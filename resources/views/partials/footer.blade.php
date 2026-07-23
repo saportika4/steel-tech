@@ -83,7 +83,7 @@
                     <div class="footer-links-prime">
                         <h2>Head Office</h2>
                         <ul>
-                            <li>9/228A, Kunnukara, Kunnukara PO,<br>Kochi, Kerala 683578</li>
+                            <li>STEEL TECH ENGINEERING & EQUIPMENT SOLUTIONS<br>MUNESHWARANAGAR, SECOND FLOOR, NO.61,4TH CROSS PIPE LINE ROAD, MALLASANDRA,Bengaluru, Bengaluru Urban, Karnataka, 560057</li>
                             <li><a href="tel:++91 9778420010">+91 9778420010</a></li>
                             <li><a href="mailto:cncsteeltechblr@gmail.com">cncsteeltechblr@gmail.com</a></li>
                         </ul>
